@@ -40,10 +40,10 @@ const emit = defineEmits<{
   (e: 'doneF', id:number): void,
   (e: 'deleteF', id:number): void,
 }>()
-function isDone(id:number){
+function isDone(){
     emit("doneF", (props.item.id))
 }
-function isDeleted(id:number){
+function isDeleted(){
     emit("deleteF", (props.item.id))
 }
 </script>

@@ -16,7 +16,7 @@ import type { taskModel } from "@/model/task";
 
 let toDo : taskModel[] = reactive([]);
 let inProgress : taskModel[] = reactive([]);
-let doneTask : taskModel[] = []
+// let doneTask : taskModel[] = []
 
 function addTask(task : string){
  const newTask = {

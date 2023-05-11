@@ -76,19 +76,17 @@ const getList = (list : number) =>{
 }
 
 const startDrag = (event: DragEvent, item: taskModel) => {
-  if (!event.dataTransfer) {
-    return;
+  const id = item.id.toString()
+  if (event.dataTransfer !== null){
+      event.dataTransfer.dropEffect = "move";
+    event.dataTransfer.effectAllowed = "move";
+    event.dataTransfer?.setData("itemID", id)
   }
-  event.dataTransfer.dropEffect = "move";
-  event.dataTransfer.effectAllowed = "move";
-  event.dataTransfer.setData("itemID", item.id)
 }
-const onDrop = (event: DragEvent, list: number) => {
-  if (!event.dataTransfer) {
-    return;
-  }
-  const itemID = event.dataTransfer.getData("itemID");
-  const foundItem = props.toDo.find((item) => item.id === itemID)
+const onDrop = (event : DragEvent, list: number) => {
+  const itemID = event.dataTransfer?.getData("itemID");
+  if (!itemID) return
+  const foundItem = props.toDo.find((item) => item.id === parseInt(itemID, 10))
   if (foundItem){ 
     foundItem.list = list
       if (list === 3){
@@ -97,9 +95,10 @@ const onDrop = (event: DragEvent, list: number) => {
         foundItem.isDone = false
       }
   }
- event.target.classList.add("drop")
+  const target = event.target as HTMLElement
+ target.classList.add("drop")
  setTimeout(() => {
-  event.target.classList.remove("drop")
+  target.classList.remove("drop")
  }, 200);
 }
 const props = defineProps<{
