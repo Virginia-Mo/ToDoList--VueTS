@@ -75,14 +75,20 @@ const getList = (list : number) =>{
   return props.toDo.filter((item) => item.list === list)
 }
 
-const startDrag = (event, item: taskModel) => {
+const startDrag = (event: DragEvent, item: taskModel) => {
+  if (!event.dataTransfer) {
+    return;
+  }
   event.dataTransfer.dropEffect = "move";
   event.dataTransfer.effectAllowed = "move";
   event.dataTransfer.setData("itemID", item.id)
 }
-const onDrop = (event, list: number) => {
+const onDrop = (event: DragEvent, list: number) => {
+  if (!event.dataTransfer) {
+    return;
+  }
   const itemID = event.dataTransfer.getData("itemID");
-  const foundItem = props.toDo.find((item) => item.id === parseInt(itemID, 10))
+  const foundItem = props.toDo.find((item) => item.id === itemID)
   if (foundItem){ 
     foundItem.list = list
       if (list === 3){
