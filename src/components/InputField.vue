@@ -60,7 +60,7 @@ function addNewTask(){
         position: absolute;
         width: 5.5rem;
         height: 5.5rem;
-        margin: 1.2rem;
+        margin: 1.8rem;
         border-radius: 50px;
         right: 19.5%;
         border: none;
